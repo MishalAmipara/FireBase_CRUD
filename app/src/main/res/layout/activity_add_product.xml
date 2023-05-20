@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"
                 android:hint="Product Description"
-                android:inputType="numberDecimal" />
+                android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
          <ImageView
              android:layout_width="200dp"
@@ -76,12 +76,12 @@
             android:text="Add Product"
             android:layout_gravity="center"/>
 
-        <Button
-            android:id="@+id/btn_updqteProduct"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Update Product"
-            android:layout_gravity="center"
-            android:visibility="gone"/>
+<!--        <Button-->
+<!--            android:id="@+id/btn_updqteProduct"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Update Product"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:visibility="gone"/>-->
     </LinearLayout>
 </LinearLayout>

@@ -81,8 +81,9 @@ public class Authentication_Activity extends AppCompatActivity {
         btn_pwdSignIn.setOnClickListener(view ->
         {
             if (isLoggedIn) {
-                Toast.makeText(this, "User already signed in", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(Authentication_Activity.this, Add_Product_Activity.class);
+                Toast.makeText(this, "Signed in user="+mAuth.getCurrentUser().getEmail(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Authentication_Activity.this, ProfileActivity.class);
+                intent.putExtra("mAuth",mAuth.getCurrentUser().getEmail());
                 startActivity(intent);
             } else {
                 signInUser();
@@ -157,7 +158,8 @@ public class Authentication_Activity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             editor.putBoolean("isLoggedIn", true);
                             editor.commit();
-                            Intent intent = new Intent(Authentication_Activity.this, Add_Product_Activity.class);
+                            Intent intent = new Intent(Authentication_Activity.this, ProfileActivity.class);
+                            intent.putExtra("mAuth",mAuth.getCurrentUser().getEmail());
                             startActivity(intent);
                             //updateUI(user);
                         } else {
@@ -242,9 +244,12 @@ public class Authentication_Activity extends AppCompatActivity {
                             Log.d("TAG", "signInWithCredential:success");
 
                             FirebaseUser user = task.getResult().getUser();
-                            editor.putBoolean("isLoggedIn", true);
+
+                        editor.putBoolean("isLoggedIn", true);
                             editor.commit();
-                            Intent intent = new Intent(Authentication_Activity.this, Add_Product_Activity.class);
+                            Intent intent = new Intent(Authentication_Activity.this, ProfileActivity.class);
+                            intent.putExtra("mAuth",mAuth.getCurrentUser().getEmail());
+                            Toast.makeText(Authentication_Activity.this, "Logged in user="+googleSignInClient.asGoogleApiClient().toString(), Toast.LENGTH_SHORT).show();
                             startActivity(intent);
                             // Update UI
                         } else {
@@ -305,12 +310,24 @@ public class Authentication_Activity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 // Check condition
                                 if (task.isSuccessful()) {
+
+
+                                    Log.d("_TAG_", "onComplete: em  -->  "+task.getResult().getUser().getEmail());
+                                    Log.d("_TAG_", "onComplete: "+task.getResult().getCredential().toString());
+                                    Log.d("_TAG_", "onComplete: un  -->  "+task.getResult().getAdditionalUserInfo().getUsername());
+                                    Log.d("_TAG_", "onComplete: pro -->  "+task.getResult().getAdditionalUserInfo().getProfile());
+
+
+
+
                                     // When task is successful redirect to profile activity display Toast
                                     Log.d("GGG", "Successfull: ");
                                     Toast.makeText(Authentication_Activity.this, "GGG", Toast.LENGTH_SHORT).show();
                                     editor.putBoolean("isLoggedIn", true);
                                     editor.commit();
-                                    startActivity(new Intent(Authentication_Activity.this, Add_Product_Activity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                                    Intent intent=new Intent(Authentication_Activity.this, ProfileActivity.class);
+                                    intent.putExtra("user",task.getResult().getUser().getEmail());
+                                    startActivity(intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
                                 } else {
                                     // When task is unsuccessful display Toast

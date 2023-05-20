@@ -32,7 +32,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 if(Islogin)
                 {
-                    startActivity(new Intent(SplashActivity.this, Add_Product_Activity.class));
+                    startActivity(new Intent(SplashActivity.this, ProfileActivity.class));
                     finish();
                 }
                 else {

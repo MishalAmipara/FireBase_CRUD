@@ -2,19 +2,29 @@ package com.example.firebase_crud;
 
 public class Producs_Data
 {
+    String id;
     String proName;
     String proPrice;
     String proDes;
-    String proImage;
+    String proImageUrl;
 
-    public Producs_Data(String proName, String proPrice, String proDes, String proImage, String imageurl) {
+    public Producs_Data() {
+    }
+
+    public Producs_Data(String id,String proName, String proPrice, String proDes, String imageurl) {
+        this.id=id;
         this.proName = proName;
         this.proPrice = proPrice;
         this.proDes = proDes;
-        this.proImage = proImage;
+        this.proImageUrl = imageurl;
     }
 
-    public Producs_Data() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getProName() {
@@ -41,11 +51,11 @@ public class Producs_Data
         this.proDes = proDes;
     }
 
-    public String getProImage() {
-        return proImage;
+    public String getProImageUrl() {
+        return proImageUrl;
     }
 
-    public void setProImage(String proImage) {
-        this.proImage = proImage;
+    public void setProImageUrl(String proImageUrl) {
+        this.proImageUrl = proImageUrl;
     }
 }
